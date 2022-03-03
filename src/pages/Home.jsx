@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 import HeroSlide from '../components/hero-slide/HeroSlide'
 import { ButtonsOutline } from '../components/buttons/Buttons'
+import MovieList from '../components/movie-list/MovieList'
+
+import { category, movieType, tvType } from '../api/tmdbApi'
 
 export default function Home() {
   return (
@@ -16,7 +19,7 @@ export default function Home() {
               <ButtonsOutline className='small'>View more</ButtonsOutline>
             </Link>
           </div>
-          {/* <MovieList category={category.movie} type={movieType.popular}/> */}
+          <MovieList category={category.movie} type={movieType.popular} />
         </div>
 
         <div className='section mb-3'>
@@ -26,7 +29,7 @@ export default function Home() {
               <ButtonsOutline className='small'>View more</ButtonsOutline>
             </Link>
           </div>
-          {/* <MovieList category={category.movie} type={movieType.top_rated}/> */}
+          <MovieList category={category.movie} type={movieType.top_rated} />
         </div>
 
         <div className='section mb-3'>
@@ -36,7 +39,7 @@ export default function Home() {
               <ButtonsOutline className='small'>View more</ButtonsOutline>
             </Link>
           </div>
-          {/* <MovieList category={category.tv} type={tvType.popular}/> */}
+          <MovieList category={category.tv} type={tvType.popular} />
         </div>
 
         <div className='section mb-3'>
@@ -46,7 +49,7 @@ export default function Home() {
               <ButtonsOutline className='small'>View more</ButtonsOutline>
             </Link>
           </div>
-          {/* <MovieList category={category.tv} type={tvType.top_rated}/> */}
+          <MovieList category={category.tv} type={tvType.top_rated} />
         </div>
       </div>
     </>

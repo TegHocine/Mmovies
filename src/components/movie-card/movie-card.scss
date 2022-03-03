@@ -1,0 +1,42 @@
+@use '../../scss/' as *;
+.movie-card {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 0.5rem;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: $border-radius;
+
+  @include flex(center, center);
+
+  &__button {
+    @include flex(center, center);
+    position: absolute;
+    padding: 0.25rem 0.35rem;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+    box-shadow: unset;
+    &:hover {
+      box-shadow: unset;
+    }
+
+    .playBtn {
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 15px solid $white;
+      margin-left: 2.5px;
+    }
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  &:hover &__button {
+    transform: scale(1);
+  }
+}

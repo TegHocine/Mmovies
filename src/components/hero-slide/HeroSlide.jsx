@@ -34,14 +34,13 @@ export default function HeroSlide() {
   }, [])
 
   return (
-    <div>
+    <div className='hero-slide'>
       <Swiper
         modules={[Autoplay]}
         grabCursor={true}
         spaceBetween={0}
         slidesPerView={1}
-        // autoplay={{ delay: 3000 }}
-      >
+        autoplay={{ delay: 4000 }}>
         {movieItems &&
           movieItems.map((movieItem, index) => (
             <SwiperSlide key={index}>
