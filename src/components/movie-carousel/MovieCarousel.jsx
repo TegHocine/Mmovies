@@ -6,9 +6,9 @@ import tmdbApi from '../../api/tmdbApi'
 
 import MovieCard from '../movie-card/MovieCard'
 
-import './movie-list.scss'
+import './movie-carousel.scss'
 
-export default function MovieList(props) {
+export default function MovieCarousel(props) {
   const [items, setItems] = useState([])
 
   useEffect(() => {

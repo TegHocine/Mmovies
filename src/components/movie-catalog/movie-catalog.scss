@@ -1,0 +1,35 @@
+@use '../../scss/' as *;
+
+.movie-catalog {
+  display: grid;
+  place-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 180px));
+  gap: 20px;
+  margin-bottom: 3rem;
+
+  &__title {
+    padding: $header-height 0 2rem;
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 3rem;
+
+    @include overlay();
+    @include flex(flex-end, center);
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(to top, $body-bg, #14202b09);
+    }
+
+    .title {
+      position: relative;
+    }
+  }
+}
