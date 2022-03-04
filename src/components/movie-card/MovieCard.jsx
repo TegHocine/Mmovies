@@ -5,7 +5,7 @@ import { category } from '../../api/tmdbApi'
 import apiConfig from '../../api/apiConfig'
 
 import './movie-card.scss'
-import play from '../../assets/play.svg'
+// import play from '../../assets/play.svg'
 
 export default function MovieCard(props) {
   const item = props.item
@@ -17,7 +17,7 @@ export default function MovieCard(props) {
   return (
     <Link to={link}>
       <div className='movie-card' style={{ backgroundImage: `url(${bg})` }}>
-        <img src={play} alt='play button' className='movie-card__button play' />
+        {/* <img src={play} alt='play button' className='movie-card__button play' /> */}
       </div>
       <h3 className='movie-card__title'>{item.title || item.name}</h3>
     </Link>
