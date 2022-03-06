@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+
 import tmdbApi, { movieType, tvType } from '../../api/tmdbApi'
 
 import MovieCard from '../movie-card/MovieCard'
@@ -37,11 +39,14 @@ export default function MovieCatalog({ category }) {
     setItems([...items, ...res.results])
     setPageNbr(pageNbr + 1)
   }
+
   return (
     <>
       <div className='movie-catalog section'>
         {items &&
-          items.map((item, index) => <MovieCard key={index} item={item} />)}
+          items.map((item, index) => (
+            <MovieCard key={index} item={item} category={category} />
+          ))}
         <ButtonsOutline
           className={'movie-catalog__loadmore small'}
           onClick={loadMore}>
@@ -60,4 +65,11 @@ export const HeaderCatalog = ({ children }) => {
       <h2 className='title'>{children}</h2>
     </div>
   )
+}
+
+MovieCatalog.prototype = {
+  category: PropTypes.string,
+}
+HeaderCatalog.prototype = {
+  children: PropTypes.any,
 }

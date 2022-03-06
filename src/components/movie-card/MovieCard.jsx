@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import { category } from '../../api/tmdbApi'
@@ -22,4 +23,9 @@ export default function MovieCard(props) {
       <h3 className='movie-card__title'>{item.title || item.name}</h3>
     </Link>
   )
+}
+
+MovieCard.prototype = {
+  item: PropTypes.object,
+  category: PropTypes.string,
 }

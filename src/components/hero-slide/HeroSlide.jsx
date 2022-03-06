@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import SwiperCore, { Autoplay } from 'swiper'
@@ -126,4 +127,13 @@ const HeroSlideModal = ({ item }) => {
         style={{ border: 'transparent', borderRadius: '30px' }}></iframe>
     </Modal>
   )
+}
+
+HeroSlideItem.prototype = {
+  item: PropTypes.object,
+  className: PropTypes.string,
+}
+
+HeroSlideModal.prototype = {
+  item: PropTypes.object,
 }

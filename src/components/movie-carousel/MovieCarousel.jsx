@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -8,20 +9,20 @@ import MovieCard from '../movie-card/MovieCard'
 
 import './movie-carousel.scss'
 
-export default function MovieCarousel(props) {
+export default function MovieCarousel({ type, category, id }) {
   const [items, setItems] = useState([])
 
   useEffect(() => {
     const getMovieLists = async () => {
       const params = {}
       let res = null
-      if (props.type !== 'similar') {
-        if (props.category === 'movie') {
-          res = await tmdbApi.getMoviesList(props.type, { params })
+      if (type !== 'similar') {
+        if (category === 'movie') {
+          res = await tmdbApi.getMoviesList(type, { params })
         }
-        res = await tmdbApi.getTvList(props.type, { params })
+        res = await tmdbApi.getTvList(type, { params })
       } else {
-        res = await tmdbApi.similar(props.type, { params })
+        res = await tmdbApi.similar(type, id)
       }
       setItems(res.results)
     }
@@ -35,10 +36,16 @@ export default function MovieCarousel(props) {
         {items &&
           items.map((item, index) => (
             <SwiperSlide key={index}>
-              <MovieCard item={item} category={props.category} />
+              <MovieCard item={item} category={category} />
             </SwiperSlide>
           ))}
       </Swiper>
     </div>
   )
+}
+
+MovieCarousel.prototype = {
+  type: PropTypes.string,
+  category: PropTypes.string,
+  id: PropTypes.string,
 }

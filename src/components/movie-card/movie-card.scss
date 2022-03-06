@@ -9,6 +9,10 @@
   border-radius: $border-radius;
   position: relative;
 
+  @include mobile {
+    height: 260px;
+  }
+
   @include flex(center, center);
 
   // &__button {

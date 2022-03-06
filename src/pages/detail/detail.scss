@@ -1,0 +1,104 @@
+@use '../../scss/' as *;
+
+.detail-hero {
+  padding: 9rem 0;
+  width: 100%;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    @include overlay();
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(to top, $body-bg, rgba($black, 0));
+  }
+
+  &__content {
+    @include flex(center, center);
+    position: relative;
+
+    &__poster {
+      flex: 1;
+      @include flex(center, flex-start);
+      position: relative;
+      padding: 0 3rem;
+      width: 55%;
+
+      img {
+        width: 400px;
+        border-radius: $border-radius;
+        box-shadow: $box-shadow;
+      }
+      @include tablet {
+        display: none;
+      }
+    }
+
+    &__info {
+      padding: 0 3rem;
+
+      & > * ~ * {
+        margin-top: 2rem;
+      }
+
+      .title {
+        font-size: 5rem;
+        font-weight: 700;
+        line-height: 1;
+
+        @include tablet {
+          font-size: 4rem;
+        }
+      }
+
+      .genres {
+        display: flex;
+        flex-wrap: wrap;
+        .btns {
+          margin-right: 0.5rem;
+        }
+      }
+
+      .overview {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .cast {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+
+        .casts__item {
+          &__img {
+            width: 120px;
+            height: 180px;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            @include mobile {
+              width: 80px;
+              height: 120px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
