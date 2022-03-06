@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 
 import apiConfig from '../../api/apiConfig'
 import tmdbApi from '../../api/tmdbApi'
 
+import MovieCarousel from '../../components/movie-carousel/MovieCarousel'
 import { ButtonsOutline } from '../../components/buttons/Buttons'
 
 import './detail.scss'
@@ -13,7 +14,7 @@ export default function Detail() {
 
   const [detail, setDetail] = useState(null)
   const [credits, setCredits] = useState(null)
-  const [video, setVideo] = useState(null)
+  const [videos, setVideos] = useState(null)
   const [bg, setBg] = useState({ origin: null, w500: null })
 
   useEffect(() => {
@@ -30,8 +31,8 @@ export default function Detail() {
       const credits = await tmdbApi.credits(category, id)
       setCredits(credits.cast.slice(0, 5))
 
-      const video = await tmdbApi.getVideos(category, id)
-      setVideo(video.results.slice(0, 5))
+      const videos = await tmdbApi.getVideos(category, id)
+      setVideos(videos.results.slice(0, 3))
     }
     getDetails()
   }, [category, id])
@@ -55,7 +56,11 @@ export default function Detail() {
                   </ButtonsOutline>
                 ))}
               </div>
+
+              {/* overview */}
               <p className='overview'> {detail.overview} </p>
+
+              {/* cast  */}
               <div className='cast'>
                 {credits &&
                   credits.map((cast, index) => (
@@ -75,6 +80,43 @@ export default function Detail() {
           </div>
         </div>
       )}
+      {/* embed videos */}
+      <div className='detail-video-container container'>
+        {videos &&
+          videos.map((video, index) => <Video key={index} item={video} />)}
+      </div>
+
+      {/* similar carousel */}
+      <div className='detail-similar container'>
+        <h2 style={{ marginBottom: '0.5rem' }}>Similar</h2>
+        <MovieCarousel type='similar' id={id} category={category} />
+      </div>
     </>
+  )
+}
+
+const Video = (props) => {
+  const item = props.item
+
+  const iframeRef = useRef(null)
+
+  useEffect(() => {
+    const height = (iframeRef.current.offsetWidth * 9) / 16 + 'px'
+    iframeRef.current.setAttribute('height', height)
+  }, [])
+
+  return (
+    <div className='detail-video'>
+      <div className='detail-video__title'>
+        <h2>{item.name}</h2>
+      </div>
+      <div className='detail-video__iframe'>
+        <iframe
+          src={`https://www.youtube.com/embed/${item.key}`}
+          ref={iframeRef}
+          width='100%'
+          title='video'></iframe>
+      </div>
+    </div>
   )
 }

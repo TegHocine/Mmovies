@@ -16,14 +16,15 @@ export default function MovieCarousel({ type, category, id }) {
     const getMovieLists = async () => {
       const params = {}
       let res = null
+
       if (type !== 'similar') {
-        if (category === 'movie') {
-          res = await tmdbApi.getMoviesList(type, { params })
-        }
-        res = await tmdbApi.getTvList(type, { params })
+        category === 'movie'
+          ? (res = await tmdbApi.getMoviesList(type, { params }))
+          : (res = await tmdbApi.getTvList(type, { params }))
       } else {
-        res = await tmdbApi.similar(type, id)
+        res = await tmdbApi.similar(category, id)
       }
+
       setItems(res.results)
     }
     getMovieLists()

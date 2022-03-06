@@ -10,11 +10,13 @@ import MovieCatalog, {
 export default function Catalog() {
   const { category } = useParams()
   return (
-    <div className='container'>
+    <>
       <HeaderCatalog>
         {category === cate.movie ? 'Movies' : 'TV Shows'}
       </HeaderCatalog>
-      <MovieCatalog category={category} />
-    </div>
+      <div className='container'>
+        <MovieCatalog category={category} />
+      </div>
+    </>
   )
 }

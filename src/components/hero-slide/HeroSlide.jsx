@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -63,6 +64,7 @@ export default function HeroSlide() {
 }
 
 const HeroSlideItem = ({ item, className }) => {
+  const navigate = useNavigate()
   const bg = ApiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path,
   )
@@ -97,7 +99,9 @@ const HeroSlideItem = ({ item, className }) => {
           <h2 className='title'> {item.title} </h2>
           <div className='overview'> {item.overview} </div>
           <div className='btns'>
-            <Buttons>Watch now</Buttons>
+            <Buttons onClick={() => navigate(`/movie/${item.id}`)}>
+              Watch now
+            </Buttons>
             <ButtonsOutline onClick={setModal}>Watch trailer</ButtonsOutline>
           </div>
         </div>
